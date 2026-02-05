@@ -1,17 +1,22 @@
 import { BCVScraper } from './services/scraper.js';
+import { StorageService } from './services/storage.js';
 
-async function scraper() {
+async function main() {
     const scraper = new BCVScraper();
-    console.log("Obteniendo tasas...\n");
-    
+    const storage = new StorageService();
+
     try {
+        // Obtiene las tasas
         const rates = await scraper.getExchangeRates();
-        console.log("Tasas obtenidas:\n", rates);
-        console.log("\n✅ Prueba finalizada con éxito.");
+
+        // Guarda en JSON
+        if (rates && rates.length > 0) {
+            await storage.saveRates(rates);
+        }
 
     } catch (error) {
-        console.error("❌ Fallo en la prueba. Error:", error);
+        console.error("Fallo en la ejecución. Error:", error);
     }
 }
 
-scraper();
+main();

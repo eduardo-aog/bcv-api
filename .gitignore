@@ -24,6 +24,9 @@ logs/
 ehthumbs.db
 Thumbs.db
 
+# Rates JSON files
+tasas.json
+
 # Build output
 dist/
 build/

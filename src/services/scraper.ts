@@ -22,42 +22,59 @@ export class BCVScraper {
             const $ = cheerio.load(data);
 
             const dateNonFormat = $('.date-display-single').first().attr('content');
+            const dateByDayFormat = $('.date-display-single').first().text().trim();
 
             const formattedDate = dateNonFormat ? dateNonFormat.split('T')[0] : new Date().toISOString().split('T')[0];
 
             const rates: Currency[] = [
                 {
                     symbol: '€',
+                    iso4217: 'EUR',
                     name: 'Euro',
                     price: parseBCVNumber($('#euro strong').text().trim()), 
-                    date: formattedDate
+                    date: formattedDate,
+                    day: dateByDayFormat
                 },
                 {
                     symbol: '¥',
+                    iso4217: 'CNY',
                     name: 'Yuan',
                     price: parseBCVNumber($('#yuan strong').text().trim()),
-                    date: formattedDate
+                    date: formattedDate,
+                    day: dateByDayFormat
                 },
                 {
                     symbol: '₺',
+                    iso4217: 'TRY',
                     name: 'Lira',
                     price: parseBCVNumber($('#lira strong').text().trim()),
-                    date: formattedDate
+                    date: formattedDate,
+                    day: dateByDayFormat
                 },
                 {
                     symbol: '₽',
+                    iso4217: 'RUB',
                     name: 'Rublo',
                     price: parseBCVNumber($('#rublo strong').text().trim()),
-                    date: formattedDate
+                    date: formattedDate,
+                    day: dateByDayFormat
                 },
                 {
                     symbol: '$',
+                    iso4217: 'USD',
                     name: 'Dolar',
                     price: parseBCVNumber($('#dolar strong').text().trim()),
-                    date: formattedDate
+                    date: formattedDate,
+                    day: dateByDayFormat
                 }
             ];
+            const isValid = rates.every(rate => rate.price > 0);
+
+            if (!isValid) {
+                console.error("ERROR: Una o mas tasas tienen valor cero. Revisar script.");
+            }
             return rates;
+
         } catch (error) {
             throw new Error(`Fallo al hallar las tasas. Error: ${error}`);
             return [];
