@@ -6,7 +6,10 @@ yarn-error.log*
 
 # Environment variables
 .env
-.env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # Logs
 logs/
@@ -14,21 +17,46 @@ logs/
 
 # OS files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 
 # Build output
 dist/
 build/
 out/
+*.tsbuildinfo
 
 # Coverage directory
 coverage/
+.nyc_output/
 
 # Optional npm cache directory
 .npm/
+.yarn/
+
+# TypeScript cache
+tsconfig.tsbuildinfo
 
 # IDE files
 .vscode/
 .idea/
 *.sublime-workspace
 *.sublime-project
+
+# Scraped data (si quieres ignorarlo)
+data/*.json
+data/*.csv
+!data/.gitkeep
+
+# Archivos temporales
+tmp/
+temp/
+
+# Sistema operativo
+*.swp
+*.swo
+*~
