@@ -2,26 +2,26 @@
 
 Script desarrollado en TypeScript para la extracción automatizada (scraping) de las tasas de cambio oficiales publicadas por el Banco Central de Venezuela (BCV).
 
-## 📋 Características
+## Características
 
-- **Tecnologías Modernas**: Construido con TypeScript para mayor robustez y tipado estático.
-- **Scraping Eficiente**: Utiliza `cheerio` para el parseo de HTML y `axios` para las peticiones HTTP.
-- **Validación de Datos**: Verifica que las tasas extraídas sean valores numéricos válidos mayores a cero.
+- **Tecnologías**: Construido con TypeScript para mayor robustez y tipado estático.
+- **Scraping**: Utiliza `cheerio` para el parseo de HTML y `axios` para las peticiones HTTP.
+- **Validaciones**: Verifica que las tasas extraídas sean valores numéricos válidos mayores a cero.
 - **Almacenamiento Local**: Guarda los resultados automáticamente en un archivo JSON estructurado.
 - **Manejo de Errores**: Incluye manejo de excepciones y validaciones de seguridad (SSL/TLS).
 
-## 🚀 Requisitos Previos
+## Requisitos Previos
 
 - **Node.js**: Versión 18.0.0 o superior.
 - **NPM**: Gestor de paquetes incluido con Node.js.
 
-## 🛠️ Instalación
+## Instalación
 
 1.  Clona este repositorio:
     ```bash
     git clone https://github.com/eduardo-aog/bcv-script
     ```
-2.  Navega al directorio del proyecto:
+2.  Entra al directorio del proyecto:
     ```bash
     cd bcv-script
     ```
@@ -30,7 +30,7 @@ Script desarrollado en TypeScript para la extracción automatizada (scraping) de
     npm install
     ```
 
-## 💻 Uso
+## Uso
 
 ### Modo Desarrollo
 
@@ -68,7 +68,7 @@ Para compilar y ejecutar la versión optimizada de JavaScript:
 - `npm run clean`: Elimina la carpeta `dist`.
 - `npm run lint`: Ejecuta la verificación de tipos (TypeScript check).
 
-## 📂 Estructura de Datos
+## Estructura de Datos
 
 El script extrae las tasas para las siguientes monedas:
 
@@ -96,7 +96,7 @@ Los datos se guardan en el archivo `./store/tasas.json` con el siguiente formato
 ]
 ```
 
-## 🗂️ Estructura del Proyecto
+## Estructura del Proyecto
 
 ```text
 bcv-script/
@@ -115,7 +115,8 @@ bcv-script/
 └── README.md           # Documentación del proyecto
 ```
 
-## 📄 Licencia
+## Licencia
 
 Este proyecto está bajo la Licencia MIT. Consulta el archivo `package.json` para más detalles.
+
 
