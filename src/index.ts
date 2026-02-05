@@ -2,15 +2,15 @@ import { BCVScraper } from './services/scraper.js';
 
 async function scraper() {
     const scraper = new BCVScraper();
-    console.log("Iniciando prueba del scraper...");
+    console.log("Obteniendo tasas...\n");
     
     try {
         const rates = await scraper.getExchangeRates();
-        console.log("Tasas obtenidas:", rates);
-        console.log("✅ Prueba finalizada con éxito.");
+        console.log("Tasas obtenidas:\n", rates);
+        console.log("\n✅ Prueba finalizada con éxito.");
 
     } catch (error) {
-        console.error("❌ Falló la prueba:", error);
+        console.error("❌ Fallo en la prueba. Error:", error);
     }
 }
 

@@ -21,25 +21,45 @@ export class BCVScraper {
             const { data } = await this.axiosInstance.get(this.url);
             const $ = cheerio.load(data);
 
-            const dateFee = $('.date-display-single').first().text().trim();
+            const dateNonFormat = $('.date-display-single').first().attr('content');
+
+            const formattedDate = dateNonFormat ? dateNonFormat.split('T')[0] : new Date().toISOString().split('T')[0];
 
             const rates: Currency[] = [
                 {
                     symbol: '€',
                     name: 'Euro',
                     price: parseBCVNumber($('#euro strong').text().trim()), 
-                    date: dateFee
+                    date: formattedDate
+                },
+                {
+                    symbol: '¥',
+                    name: 'Yuan',
+                    price: parseBCVNumber($('#yuan strong').text().trim()),
+                    date: formattedDate
+                },
+                {
+                    symbol: '₺',
+                    name: 'Lira',
+                    price: parseBCVNumber($('#lira strong').text().trim()),
+                    date: formattedDate
+                },
+                {
+                    symbol: '₽',
+                    name: 'Rublo',
+                    price: parseBCVNumber($('#rublo strong').text().trim()),
+                    date: formattedDate
                 },
                 {
                     symbol: '$',
                     name: 'Dolar',
                     price: parseBCVNumber($('#dolar strong').text().trim()),
-                    date: dateFee
+                    date: formattedDate
                 }
             ];
             return rates;
         } catch (error) {
-            throw new Error(`Error fetching exchange rates: ${error}`);
+            throw new Error(`Fallo al hallar las tasas. Error: ${error}`);
             return [];
         }
     }
