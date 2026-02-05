@@ -1,0 +1,35 @@
+{
+  "name": "bcv-script",
+  "version": "1.0.0",
+  "description": "Script para scraping de datos del BCV usando Cheerio y TypeScript",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "ts-node src/index.ts",
+    "dev:watch": "nodemon --exec ts-node src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "clean": "rm -rf dist",
+    "lint": "tsc --noEmit",
+    "prestart": "npm run build",
+    "scrape": "ts-node src/index.ts"
+  },
+  "keywords": ["scraping", "cheerio", "typescript"],
+  "author": "Tu Nombre",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.0",
+    "ts-node": "^10.9.1",
+    "@types/node": "^20.10.0",
+    "@types/cheerio": "^0.22.37",
+    "@types/axios": "^0.14.0",
+    "nodemon": "^3.0.1",
+    "ts-node-dev": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
