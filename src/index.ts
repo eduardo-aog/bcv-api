@@ -1,5 +1,5 @@
-import { BCVScraper } from './services/scraper.js';
-import { StorageService } from './services/storage.js';
+import { BCVScraper } from './services/scraper';
+import { StorageService } from './services/storage';
 
 async function main() {
     const scraper = new BCVScraper();

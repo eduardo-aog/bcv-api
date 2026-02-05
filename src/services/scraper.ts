@@ -1,8 +1,8 @@
 import * as cheerio from 'cheerio';
 import axios from 'axios';
 import https from 'https';
-import { Currency } from '../types/currency.js';
-import { parseBCVNumber } from '../utils/helpers.js';
+import { Currency } from '../types/currency';
+import { parseBCVNumber } from '../utils/helpers';
 
 export class BCVScraper {
     readonly url = 'https://www.bcv.org.ve/';

@@ -1,5 +1,5 @@
 import { writeFile } from 'fs/promises';
-import { Currency } from '../types/currency.js';
+import { Currency } from '../types/currency';
 
 export class StorageService {
     private readonly filePath = './store/tasas.json';
