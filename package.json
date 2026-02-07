@@ -1,7 +1,7 @@
 {
   "name": "bcv-script",
   "version": "1.0.0",
-  "description": "Script para scraping de datos del BCV usando Cheerio y TypeScript",
+  "description": "Script para cargar automaticamente las tasas de cambio de divisas del Banco Central de Venezuela",
   "main": "dist/index.js",
   "scripts": {
     "dev": "ts-node src/index.ts",
@@ -19,7 +19,7 @@
     "cheerio",
     "typescript"
   ],
-  "author": "Tu Nombre",
+  "author": "Eduardo Orozco",
   "license": "MIT",
   "dependencies": {
     "axios": "^1.6.0",
