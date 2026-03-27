@@ -14,8 +14,8 @@ app.use(express.json());
 const scraper = new BCVScraper();
 const storage = new StorageService();
 
-// Endpoint para consultar tasas
-app.get('/api/rates', async (req, res) => {
+// El endpoint se basa en la URL original de Render
+app.get('', async (req, res) => {
     try {
         console.log(`[${new Date().toISOString()}] Petición GET a /api/rates`);
         
