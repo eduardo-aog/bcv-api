@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import { BCVScraper } from './services/scraper';
-import { StorageService } from './services/storage';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,8 +11,6 @@ app.use(express.json());
 
 // Instanciar servicios
 const scraper = new BCVScraper();
-const storage = new StorageService();
-
 // El endpoint se basa en la URL original de Render
 app.get('', async (req, res) => {
     res.send('BCV API is running. Access /rates to get exchange rates.');
@@ -27,11 +24,6 @@ app.get('/rates', async (req, res) => {
         const rates = await scraper.getExchangeRates();
 
         if (rates && rates.length > 0) {
-            // Guarda en disco sin bloquear la respuesta
-            storage.saveRates(rates).catch(error => {
-                console.error("Error guardando tasas en archivo:", error);
-            });
-            
             // Retorna los datos como JSON a la misma solicitud
             res.json(rates);
         } else {
