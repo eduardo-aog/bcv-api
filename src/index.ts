@@ -16,6 +16,10 @@ const storage = new StorageService();
 
 // El endpoint se basa en la URL original de Render
 app.get('', async (req, res) => {
+    res.send('BCV API is running. Access /rates to get exchange rates.');
+});
+
+app.get('/rates', async (req, res) => {
     try {
         console.log(`[${new Date().toISOString()}] Petición GET a /api/rates`);
         
@@ -47,6 +51,7 @@ app.get('/health', (req, res) => {
 // Iniciar servidor
 app.listen(PORT, () => {
     console.log(`Servidor de BCV Scraper corriendo en el puerto ${PORT}`);
-    console.log(`- API Rates: http://localhost:${PORT}/api/rates`);
+    console.log(`- Endpoint principal: http://localhost:${PORT}/`);
+    console.log(`- Tasas de cambio: http://localhost:${PORT}/rates`);
     console.log(`- Health Check: http://localhost:${PORT}/health`);
 });
