@@ -1,23 +1,25 @@
-﻿# BCV Scraper Script
+# BCV API
 
-Script desarrollado en TypeScript para la extracción automatizada (scraping) de las tasas de cambio oficiales publicadas por el Banco Central de Venezuela (BCV).
+API desarrollada en TypeScript para la extracción automatizada (scraping) de las tasas de cambio oficiales publicadas por el Banco Central de Venezuela (BCV).
 
 ## Características
 
+- **API REST**: Provee endpoints mediante Express.js para acceder fácilmente a las tasas de cambio.
 - **Tecnologías**: Construido con TypeScript para mayor robustez y tipado estático.
 - **Scraping**: Utiliza `cheerio` para el parseo de HTML y `axios` para las peticiones HTTP.
-- **Validaciones**: Verifica que las tasas extraídas sean valores numéricos válidos mayores a cero.
-- **Almacenamiento Local**: Guarda los resultados automáticamente en un archivo JSON estructurado.
-- **Manejo de Errores**: Incluye manejo de excepciones y validaciones de seguridad (SSL/TLS).
+- **Validaciones**: Verifica que las tasas extraídas sean valores numéricos y estén disponibles.
+- **Gestor de Paquetes**: Utiliza `pnpm` para la instalación de dependencias, como cambio representativo en la nueva versión.
 
 ## Requisitos Previos
 
 - **Node.js**: Versión 18.0.0 o superior.
-- **NPM**: Gestor de paquetes incluido con Node.js.
+- **pnpm**: Gestor de paquetes rápido y eficiente.
 
 ## Instalación
 
-1.  Clona este repositorio:
+1.  Clona este repositorio.
+2.  Entra al directorio del proyecto.
+3.  Instala las dependencias empleando `pnpm`:
     ```bash
     git clone https://github.com/eduardo-aog/bcv-script
     ```
@@ -27,23 +29,23 @@ Script desarrollado en TypeScript para la extracción automatizada (scraping) de
     ```
 3.  Instala las dependencias:
     ```bash
-    npm install
+    pnpm install
     ```
 
 ## Uso
 
 ### Modo Desarrollo
 
-Para ejecutar el script en modo de desarrollo (utilizando `ts-node`):
+Para iniciar el servidor en modo de desarrollo (utilizando `ts-node`):
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
-Para ejecutar en modo observador (reinicia automáticamente al detectar cambios):
+Para ejecutar en modo observador (reinicia automáticamente al detectar cambios con `nodemon`):
 
 ```bash
-npm run dev:watch
+pnpm run dev:watch
 ```
 
 ### Modo Producción
@@ -53,35 +55,29 @@ Para compilar y ejecutar la versión optimizada de JavaScript:
 1.  **Compilar el código TypeScript:**
 
     ```bash
-    npm run build
+    pnpm run build
     ```
 
     Esto generará los archivos JavaScript en la carpeta `dist/`.
 
-2.  **Ejecutar el script compilado:**
+2.  **Ejecutar el servidor compilado:**
     ```bash
-    npm start
+    pnpm start
     ```
 
 ### Comandos Adicionales
 
-- `npm run clean`: Elimina la carpeta `dist`.
-- `npm run lint`: Ejecuta la verificación de tipos (TypeScript check).
+- `pnpm run clean`: Elimina la carpeta `dist`.
+- `pnpm run lint`: Ejecuta la verificación de tipos (TypeScript check).
 
-## Estructura de Datos
+## Endpoints
 
-El script extrae las tasas para las siguientes monedas:
+Una vez iniciado el servidor (por defecto en el puerto 3000), los siguientes endpoints estarán disponibles:
 
-- Euro (€)
-- Yuan (¥)
-- Lira (₺)
-- Rublo (₽)
-- Dólar ($)
+### `GET /rates`
+Retorna las tasas de cambio oficiales del BCV en formato JSON.
 
-### Salida (Output)
-
-Los datos se guardan en el archivo `./store/tasas.json` con el siguiente formato:
-
+**Ejemplo de Respuesta:**
 ```json
 [
   {
@@ -96,27 +92,41 @@ Los datos se guardan en el archivo `./store/tasas.json` con el siguiente formato
 ]
 ```
 
+### `GET /health`
+Verifica el estado de salud de la API. Principalmente usado en despliegues (como Render).
+
+**Ejemplo de Respuesta:**
+```json
+{
+  "status": "OK",
+  "timestamp": "2023-10-27T12:00:00.000Z"
+}
+```
+
+### `GET /`
+Endpoint principal. Muestra un texto indicando cómo utilizar la API y acceder a la ruta de tasas de cambio.
+
 ## Estructura del Proyecto
 
 ```text
-bcv-script/
+bcv-api/
 ├── src/
 │   ├── services/
 │   │   ├── scraper.ts  # Lógica de scraping con Cheerio
-│   │   └── storage.ts  # Servicio de almacenamiento de archivos
+│   │   └── storage.ts  # Servicio de almacenamiento de datos para guardado local
 │   ├── types/
-│   │   └── currency.ts # Definiciones de interfaces TypeScript
-│   ├── utils/          # Utilidades auxiliares
-│   └── index.ts        # Punto de entrada de la aplicación
-├── store/              # Directorio donde se guardan los resultados (tasas.json)
-├── dist/               # Código compilado (generado por npm run build)
-├── package.json        # Dependencias y scripts
+│   │   └── currency.ts # Interfaces de TypeScript (Currency)
+│   ├── utils/
+│   │   └── helpers.ts  # Funciones utilitarias (parseBCVNumber)
+│   └── index.ts        # Punto de entrada, configuración de Express y endpoints
+├── store/              # Directorio heredado de la versión script
+├── dist/               # Código compilado (generado por pnpm run build)
+├── package.json        # Dependencias y metadata
+├── pnpm-lock.yaml      # Lockfile asegurando consistencia con pnpm
 ├── tsconfig.json       # Configuración de TypeScript
-└── README.md           # Documentación del proyecto
+└── README.md           # Documentación
 ```
 
 ## Licencia
 
 Este proyecto está bajo la Licencia MIT. Consulta el archivo `package.json` para más detalles.
-
-
